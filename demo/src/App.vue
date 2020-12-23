@@ -73,6 +73,45 @@
           }
         }-->
 
+    <!--兄弟组件之间的传值
+        1.创建一个公共的js文件并且引入Vue，然后在抛出实例化后的vue如下，每个兄弟组件都要引入这个js文件：
+                  import Vue from 'vue';
+                  export default  new Vue;
+        2.传数据的组件：<button @click=btn>点击给Header组件传值</button>设置事件
+        3.传数据的组件：methods:{
+                          btn(){
+                            bus.$emit('自定义事件名称',要传输的数据)
+                          }
+                        }
+        4.接收数据的组件：computed:{
+                            conStr(){
+                              bus.$on('自定义事件名称',(形参)=>{
+                                  console.log(形参);  //形参就是传过来的数据
+                              })
+                            }
+                        }
+          或：created:{ //生命周期
+                  add(){
+                      bus.$on("Fstr",(data)=>{
+                          return data;
+                      })
+                  }
+              }
+        5.接收数据的组件：在template部分使用：{{conStr}}，名字要对应
+    -->
+    <Swie></Swie>
+
+    <!-- axios
+        1.下载axios：npm install axios --save
+        2.在main.js中引入：import axios from 'axios'
+                          Vue.prototype.axios = axios
+        3. -->
+
+    
+
+
+
+
 
 
   </div>
@@ -81,6 +120,7 @@
 <script>
 import Footer from './components/Footer';
 import Header from './components/Header';
+import Swie from './components/Swie';
 export default{
   data(){
     return {
@@ -93,7 +133,8 @@ export default{
   },
   components:{
     Footer,
-    Header
+    Header,
+    Swie
   },
   computed:{
 
